@@ -3,13 +3,13 @@ const mysql = require("mysql");
 
 const db = mysql.createConnection({
 
-  host: "localhost",
+  host: "sql6.freesqldatabase.com",
 
-  user: "root",
+  user: "sql6435535",
 
-  password: "mysqlroot",
+  password: "dgajrJ9Lil",
 
-  database: 'customer',
+  database: 'sql6435535',
 
 });
 
@@ -27,22 +27,6 @@ db.connect((err) => {
 
 const app = express();
 
-app.get("/createdb", (req, res) => {
-
-  let sql = "CREATE DATABASE customer";
-
-  db.query(sql, (err) => {
-
-    if (err) {
-
-      throw err;
-
-    }
-    res.send("Database created");
-
-  });
-
-});
 
 
 app.get("/createtable", (req, res) => {

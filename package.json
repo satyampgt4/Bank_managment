@@ -16,8 +16,10 @@
     "url": "https://github.com/satyampgt4/Bank_managment/issues"
   },
   "homepage": "https://github.com/satyampgt4/Bank_managment#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.12"
   }
 }
