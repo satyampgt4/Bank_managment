@@ -1,0 +1,32 @@
+<%- include ('partials/header.ejs'); -%>
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>Get Account</h1>
+            <div class="form-group col-md-1">
+                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+        <% if (message !='' ) { %>
+            <p class="text-center text-danger">
+                <%= message %>
+            </p>
+            <% } %>
+
+                <form class="add-account-form" action="/view" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="acno">Account Number</label>
+                            <input type="text" class="form-control" name="acno" id="acnoi" placeholder="Account Number"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-success float-right">View Account</button>
+                    </div>
+                </form>
+    </div>
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>

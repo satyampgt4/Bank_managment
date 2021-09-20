@@ -1,0 +1,63 @@
+<%- include ('partials/header.ejs'); -%>
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>View Account</h1>
+            <div class="form-group col-md-1">
+                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+        <% if (message) { %>
+            <p class="text-center text-danger">
+                <%= message %>
+            </p>
+            <% } %>
+                <% if (accounts) { %>
+                    <form class="add-account-form" action="" method="">
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="acnod">Account Number</label>
+                                <input type="text" class="form-control" name="acnod" id="acno"
+                                    value="<%= accounts.acno %>" disabled>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="number">Balance</label>
+                                <input type="number" class="form-control" name="number" id="acno" placeholder="Number"
+                                    value="<%= accounts.balance %>" disabled>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="first-name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="first-name"
+                                    value="<%= accounts.first_name %>" disabled>
+
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="last-name"
+                                    value="<%= accounts.last_name %>" disabled>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="ac_type">Type</label>
+                                <select id="ac-type" name="ac_type" class="form-control" disabled>
+                                    <option selected>
+                                        <%= accounts.ac_type %>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                    <% } else { %>
+                        <p class="text-center">Account Not Found. Go <a href="/add">here</a> to add Account.</p>
+                        <% } %>
+    </div>
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>

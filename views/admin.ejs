@@ -1,0 +1,70 @@
+<%- include ('partials/header.ejs'); -%>
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>Show All</h1>
+            <div class="form-group col-md-1">
+                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <% if (accounts.length> 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Account Number</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Balance</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% accounts.forEach((account, index)=> { %>
+                        <tr>
+                            <th scope="row">
+                                <%= account.acno %>
+                            </th>
+                            <td>
+                                <%= account.first_name %>
+                            </td>
+                            <td>
+                                <%= account.last_name %>
+                            </td>
+                            <td>
+                                <%= account.ac_type %>
+                            </td>
+                            <td>
+                                <%= account.balance %>
+                            </td>
+                            <td>
+                                <% if (type=="Admin" ||type=="Manager" ) {%>
+                                    <% if (account.first_name !="Bank" ) {%>
+                                        <form class="form-group col-md-10" action="/edit" method="POST">
+                                            <input type="text" class="form-control" name="acno" id="acnoi"
+                                                value="<%= account.acno %>" style="display: none;">
+                                            <button type="submit" class="btn btn-sm btn-success btn-block">Edit</button>
+                                        </form>
+                                        <% } else { %>
+                                            <form class="form-group col-md-10">
+                                                <button type="submit" class="btn btn-sm btn-success btn-block"
+                                                    style="visibility: hidden;">Edit</button>
+                                            </form>
+                                            <% } %>
+                                                <% } %>
+
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <p class="text-center">No accounts found. Go <a href="/add">here</a> to add account.</p>
+                <% } %>
+    </div>
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>

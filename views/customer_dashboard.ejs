@@ -1,0 +1,32 @@
+<%- include ('partials/header.ejs'); -%>
+
+    <div class="table-wrapper row  justify-content-center">
+        <div class="table-wrapper col-md-8  " style=" font-size: 1rem;">
+            <div class="form-row justify-content-center">
+                <div class=" col-md-5">
+                    <div class="form-group">
+
+                        <a href="/fundtransfer" class="btn btn-sm btn-success btn-block"
+                            style=" font-size: 1rem; padding: .375rem .75rem;">Fund
+                            Transfer</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row justify-content-center">
+                <div class=" col-md-5">
+                    <form class="form-group" action="/view" method="POST">
+                        <input type="text" name="acno" value="<%= account %>" style="display: none;">
+                        <button type="submit" class="btn btn-sm btn-success btn-block "
+                            style=" font-size: 1rem; padding: .375rem .75rem;">View
+                            Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>

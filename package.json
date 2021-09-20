@@ -2,7 +2,7 @@
   "name": "bank_managment",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,8 +16,22 @@
     "url": "https://github.com/satyampgt4/Bank_managment/issues"
   },
   "homepage": "https://github.com/satyampgt4/Bank_managment#readme",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.1.1",
+    "bootstrap-icons": "^1.5.0",
+    "ejs": "^3.1.6",
+    "express-fileupload": "^1.2.1",
+    "express-session": "^1.17.2",
+    "favicons": "^6.2.2",
+    "install": "^0.13.0",
+    "node-sessionstorage": "^1.0.0",
+    "req-flash": "0.0.3",
+    "sessionstorage-for-nodejs": "^1.0.0",
+    "window": "^4.2.7"
+  },
   "devDependencies": {
+    "@types/express-session": "^1.17.4",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.12"

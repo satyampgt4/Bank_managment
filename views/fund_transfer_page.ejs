@@ -1,0 +1,51 @@
+<%- include ('partials/header.ejs'); -%>
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>Fund Transfer</h1>
+            <div class="form-group col-md-1">
+                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+        <% if (message !='' ) { %>
+            <p class="text-center text-danger">
+                <%= message %>
+            </p>
+            <% } %>
+
+                <form class="add-account-form" action="/fundtransfer" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="acnof">From Account </label>
+                            <% if (type=="Personal" ) { %>
+                                < <input type="text" class="form-control" name="acnod" id="acno" value="<%= account %>"
+                                    required disabled title="Account number cannot be edited.">
+                                    <input type="text" class="form-control" name="acnof" id="acnoi"
+                                        value="<%= account %>" style="display: none;">
+                                    <% } else { %>
+                                        <input type="text" class="form-control" name="acnof" id="acnofi"
+                                            placeholder="Account Number" required>
+                                        <% } %>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="acnot">To Account</label>
+                            <input type="text" class="form-control" name="acnot" id="acnoti"
+                                placeholder="Account Number" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="amount">Amount</label>
+                            <input type="number" class="form-control" name="amount" id="amounti" placeholder="Amount"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-success float-right">Transfer</button>
+                    </div>
+                </form>
+    </div>
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>
