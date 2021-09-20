@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = require("./router");
 const db = require("./database");
-const port = 5000;
+const port = process.env.PORT || 5000;
 global.db = db;
 
 // configure middleware

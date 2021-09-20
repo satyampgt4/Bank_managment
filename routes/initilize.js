@@ -1,14 +1,14 @@
 module.exports = {
   initilize: (req, res) => {
 
-    let pq = `DROP table account`;
-    db.query(pq, (err, result) => {
-      if (err) throw err;
-    });
-    pq = `DROP table credantial`;
-    db.query(pq, (err, result) => {
-      if (err) throw err;
-    });
+    // let pq = `DROP table account`;
+    // db.query(pq, (err, result) => {
+    //   if (err) throw err;
+    // });
+    // pq = `DROP table credantial`;
+    // db.query(pq, (err, result) => {
+    //   if (err) throw err;
+    // });
 
     let query = `SHOW tables`;
 
