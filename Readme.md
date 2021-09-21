@@ -17,7 +17,7 @@ Such as-
 
 you can see the working of this app using following link
 
-[Bank Management System](bank-managment-system.herokuapp.com)
+[Bank Management System](https://bank-managment-system.herokuapp.com)
 
 OR you can setup it up on you own system. step by step guide for setup is given below
 
