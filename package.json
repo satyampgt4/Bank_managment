@@ -24,7 +24,10 @@
     "install": "^0.13.0",
     "node-sessionstorage": "^1.0.0",
     "req-flash": "0.0.3",
+    "@types/express-session": "^1.17.4",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.12",
     "sessionstorage-for-nodejs": "^1.0.0"
   },
   "devDependencies": {
