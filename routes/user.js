@@ -166,7 +166,6 @@ module.exports = {
             accounts: result,
             type: req.session.user_type,
             user: req.session.user_name,
-            account: accno,
             message: "",
 
           });
