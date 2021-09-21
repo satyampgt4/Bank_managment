@@ -46,7 +46,7 @@ app.get("/init", initilize);
 app.get("/add", addAccountPage);
 app.get("/edit", editAccountPage);
 app.get("/view", showAccountPage);
-app.get("/delete/", deleteAccount);
+// app.get("/delete/", deleteAccount);
 app.get("/logout/", logOut);
 app.get("/transaction", transactionPage);
 app.get("/fundtransfer", fundTransferPage);

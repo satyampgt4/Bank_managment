@@ -40,14 +40,29 @@
         <p class="nav-link dropdown-toggle mr-md-5" data-toggle="dropdown">
           <%= user %>
         </p>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="/dashboard">Dashboard</a>
-          <a class="dropdown-item" href="/logout">Log Out</a>
-        </div>
+        <% if (user!='Guest' ) { %>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/dashboard">Dashboard</a>
+            <a class="dropdown-item" href="/logout">Log Out</a>
+          </div>
+          <% } %>
+
       </li>
 
     </ul>
   </nav>
+  <% if (message !='' && message ) { %>
+    <% if (alert=='Success' ) { %>
+      <div class="alert alert-success">
+        <% }else{ %>
+          <div class="alert alert-danger">
+            <% } %>
+              <strong>
+                <%= message %>
+              </strong> </a>.
+          </div>
+          <% } %>
+
 </body>
 
 </html>

@@ -3,16 +3,21 @@ module.exports = {
   getLoginPage: (req, res) => {
     let query = `SHOW tables`;
     db.query(query, (err, result) => {
-      if (result.length == 0) {
+      if (result.length < 2) {
         res.redirect("/init");
-      } else {
-        let user_name = "Guest";
 
+      } else {
+        let mas = req.session.message;
+        let use = "Guest"
+        req.session.message = "";
+        if (req.session.auth) {
+          use = req.session.user_name;
+        }
         res.render("login.ejs", {
           title: "Welcome to Panna Bank View Account",
-          user: user_name,
-          type: req.session.user_type,
-          account: req.session.acno
+          user: use,
+          message: mas,
+          alert: req.session.alert,
         });
       }
     });
@@ -36,24 +41,31 @@ module.exports = {
           console.log(result[0]);
           res.redirect("/dashboard")
         } else {
-          console.log("Incorrect Password");
-          res.end();
+          req.session.message = "Incorrect Password";
+          req.session.alert = "Failed";
+          res.redirect("/");
         }
+
       } else {
-        console.log("Incorrect User Name");
-        res.end();
+        req.session.message = "Incorrect User Name or User Type ";
+        req.session.alert = "Failed";
+        res.redirect("/");
       }
     });
   },
   getDashboardPage: (req, res) => {
     if (req.session.auth) {
       let user_type = req.session.user_type;
+      let mas = req.session.message;
+      req.session.message = "";
       if (user_type == "Admin") {
         res.render("admin_dashboard.ejs", {
           title: "Welcome to Panna Bank View Account",
           user: req.session.user_name,
           type: user_type,
-          account: req.session.acno
+          account: req.session.acno,
+          message: mas,
+          alert: req.session.alert,
         });
       } else if (user_type == "Manager") {
         res.render("manager_dashboard.ejs", {
@@ -67,28 +79,34 @@ module.exports = {
           title: "Welcome to Panna Bank View Account",
           user: req.session.user_name,
           type: user_type,
-          account: req.session.acno
+          account: req.session.acno,
+          message: mas,
+          alert: req.session.alert,
         });
       } else {
         res.render("customer_dashboard.ejs", {
           title: "Welcome to Panna Bank View Account",
           user: req.session.user_name,
           type: user_type,
-          account: req.session.acno
+          account: req.session.acno,
+          message: mas,
+          alert: req.session.alert,
         });
       }
     }
 
     else {
-      console.log("You are not Loged IN");
-      res.end();
+      req.session.message = "You are not Loged IN";
+      req.session.alert = "Failed";
+      res.redirect("/");
     };
   },
   logOut: (req, res) => {
     req.session.auth = false;
     req.session.user_name = "Guest";
     req.session.user_type = "";
-    req.session.acno = 0;
+    req.session.message = "You are Loged out Successfully";
+    req.session.alert = "Success";
     res.redirect("/");
   }
 };

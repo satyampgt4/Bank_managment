@@ -8,47 +8,42 @@
                 <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
             </div>
         </div>
-        <% if (message !='' ) { %>
-            <p class="text-center text-danger">
-                <%= message %>
-            </p>
-            <% } %>
 
-                <form class="add-account-form" method="POST" action="">
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="first-name">First Name</label>
-                            <input type="text" class="form-control" name="first_name" id="first-name"
-                                placeholder="First Name" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="last-name">Last Name</label>
-                            <input type="text" class="form-control" name="last_name" id="last-name"
-                                placeholder="Last Name" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="balance">Balance</label>
-                            <input type="number" class="form-control" name="balance" id="balance" placeholder="Balance"
-                                required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="ac_type">Account Type</label>
-                            <select id="ac_type" name="ac_type" class="form-control" placeholder="Type" required>
-                                <option selected disabled>Choose Type</option>
-                                <option>Saving</option>
-                                <option>Current</option>
-                                <option>Fixed Deposit</option>
-                                <option>Loan Account</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary float-right">Add Account</button>
-                    <button type="reset" class="btn btn-primary float-left">Reset</button>
-                </form>
+        <form class="add-account-form" method="POST" action="">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="first-name">First Name</label>
+                    <input type="text" class="form-control" name="first_name" id="first-name" placeholder="First Name"
+                        required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" class="form-control" name="last_name" id="last-name" placeholder="Last Name"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="balance">Balance</label>
+                    <input type="number" class="form-control" name="balance" id="balance" placeholder="Balance"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="ac_type">Account Type</label>
+                    <select id="ac_type" name="ac_type" class="form-control" placeholder="Type" required>
+                        <option selected disabled>Choose Type</option>
+                        <option>Saving</option>
+                        <option>Current</option>
+                        <option>Fixed Deposit</option>
+                        <option>Loan Account</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-right">Add Account</button>
+            <button type="reset" class="btn btn-primary float-left">Reset</button>
+        </form>
     </div>
     </div>
     <%- include ('partials/footer.ejs'); -%>

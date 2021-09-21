@@ -6,64 +6,59 @@
                 <a href="/edit" class="btn btn-primary btn-block">Back</a>
             </div>
         </div>
-        <% if (message) { %>
-            <p class="text-center text-danger">
-                <%= message %>
-            </p>
-            <% } %>
-                <% if (accounts) { %>
-                    <form class="add-account-form" action="" method="post">
-                        <div class="form-row">
-                            <div class="form-group col-md-5">
-                                <label for="acnod">Account Number</label>
-                                <input type="text" class="form-control" name="acnod" id="acno"
-                                    value="<%= accounts.acno %>" required disabled
-                                    title="Account number cannot be edited.">
-                                <input type="text" class="form-control" name="acno" id="acnoi"
-                                    value="<%= accounts.acno %>" style="display: none;">
-                            </div>
-                            <div class="form-group col-md-5">
-                                <label for="number">Balance</label>
-                                <input type="number" class="form-control" name="number" id="acno" placeholder="Number"
-                                    value="<%= accounts.balance %>" required disabled title="Balance cannot be edited.">
-                            </div>
 
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-5">
-                                <label for="first-name">First Name</label>
-                                <input type="text" class="form-control" name="first_name" id="first-name"
-                                    value="<%= accounts.first_name %>" required>
-                            </div>
-                            <div class="form-group col-md-5">
-                                <label for="last-name">Last Name</label>
-                                <input type="text" class="form-control" name="last_name" id="last-name"
-                                    value="<%= accounts.last_name %>" required>
-                            </div>
+        <% if (accounts) { %>
+            <form class="add-account-form" action="" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="acnod">Account Number</label>
+                        <input type="text" class="form-control" name="acnod" id="acno" value="<%= accounts.acno %>"
+                            required disabled title="Account number cannot be edited.">
+                        <input type="text" class="form-control" name="acno" id="acnoi" value="<%= accounts.acno %>"
+                            style="display: none;">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="number">Balance</label>
+                        <input type="number" class="form-control" name="number" id="acno" placeholder="Number"
+                            value="<%= accounts.balance %>" required disabled title="Balance cannot be edited.">
+                    </div>
 
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="ac_type">Type</label>
-                                <select id="ac-type" name="ac_type" class="form-control" required>
-                                    <option selected>
-                                        <%= accounts.ac_type %>
-                                    </option>
-                                    <option>Saving</option>
-                                    <option>Current</option>
-                                    <option>Bank</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success float-right" formaction="/verifyEdit">Update
-                            Account</button>
-                        <button type="submit" class="btn btn-danger float-left" formaction="/delete">Delete
-                            Account</button>
-                    </form>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="first-name">First Name</label>
+                        <input type="text" class="form-control" name="first_name" id="first-name"
+                            value="<%= accounts.first_name %>" required>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" id="last-name"
+                            value="<%= accounts.last_name %>" required>
+                    </div>
 
-                    <% } else { %>
-                        <p class="text-center">Account Not Found. Go <a href="/add">here</a> to add Account.</p>
-                        <% } %>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="ac_type">Type</label>
+                        <select id="ac-type" name="ac_type" class="form-control" required>
+                            <option selected>
+                                <%= accounts.ac_type %>
+                            </option>
+                            <option>Saving</option>
+                            <option>Current</option>
+                            <option>Bank</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success float-right" formaction="/verifyEdit">Update
+                    Account</button>
+                <button type="submit" class="btn btn-danger float-left" formaction="/delete">Delete
+                    Account</button>
+            </form>
+
+            <% } else { %>
+                <p class="text-center">Account Not Found. Go <a href="/add">here</a> to add Account.</p>
+                <% } %>
     </div>
     </div>
     <%- include ('partials/footer.ejs'); -%>

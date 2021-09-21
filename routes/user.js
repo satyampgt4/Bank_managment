@@ -1,15 +1,27 @@
 module.exports = {
   addAccountPage: (req, res) => {
-    res.render("add_account.ejs", {
-      title: "Welcome to Panna Bank Add a new Account",
-      message: "",
-      user: req.session.user_name,
-      type: req.session.user_type,
-      account: req.session.acno
-    });
+    if (req.session.auth) {
+      if (req.session.user_type == "Admin" || req.session.user_type == "Manager") {
+        res.render("add_account.ejs", {
+          title: "Welcome to Panna Bank Add a new Account",
+          message: "",
+          user: req.session.user_name,
+          type: req.session.user_type,
+          account: req.session.acno,
+          message: req.session.message,
+        });
+      } else {
+        req.session.message = "You are not Authorised ";
+        req.session.alert = "Failed";
+        res.redirect("/dashboard");
+      }
+    } else {
+      req.session.message = "You are not Logged IN ";
+      req.session.alert = "Failed";
+      res.redirect("/");
+    }
   },
   addAccount: (req, res) => {
-    const message = "";
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
     const balance = req.body.balance;
@@ -21,18 +33,31 @@ module.exports = {
       if (err) {
         return res.status(200).send(err);
       }
-      res.redirect("/home");
+      req.session.message = "Account Added Successfully";
+      req.session.alert = "Success";
+      res.redirect("/view_all");
     });
   },
   editAccountPage: (req, res) => {
-
-    res.render("edit_account.ejs", {
-      title: "Welcome to Panna Bank Add a new Account",
-      message: "",
-      user: req.session.user_name,
-      type: req.session.user_type,
-      account: req.session.acno
-    });
+    if (req.session.auth) {
+      if (req.session.user_type == "Admin" || req.session.user_type == "Manager") {
+        res.render("edit_account.ejs", {
+          title: "Welcome to Panna Bank Add a new Account",
+          message: "",
+          user: req.session.user_name,
+          type: req.session.user_type,
+          account: req.session.acno
+        });
+      } else {
+        req.session.message = "You are not Authorised ";
+        req.session.alert = "Failed";
+        res.redirect("/dashboard");
+      }
+    } else {
+      req.session.message = "You are not Logged IN ";
+      req.session.alert = "Failed";
+      res.redirect("/");
+    }
   },
 
   verifyEditAccountPage: (req, res) => {
@@ -42,14 +67,20 @@ module.exports = {
       if (err) {
         return res.status(500).send(err);
       }
-      res.render("verify_edit_account.ejs", {
-        title: "Edit Account",
-        accounts: result[0],
-        message: "",
-        user: req.session.user_name,
-        type: req.session.user_type,
-        account: req.session.acno
-      });
+      if (result.length != 0) {
+        res.render("verify_edit_account.ejs", {
+          title: "Edit Account",
+          accounts: result[0],
+          message: "",
+          user: req.session.user_name,
+          type: req.session.user_type,
+          account: req.session.acno
+        });
+      } else {
+        req.session.message = "Account Not Found";
+        req.session.alert = "Failed";
+        res.redirect("/edit");
+      }
     });
   },
   editAccount: (req, res) => {
@@ -66,6 +97,8 @@ module.exports = {
       if (err) {
         return res.status(500).send(err);
       }
+      req.session.message = "Account Edited Successfully";
+      req.session.alert = "Success";
       res.redirect("/view_all");
     });
   },
@@ -77,6 +110,8 @@ module.exports = {
       if (err) {
         return res.status(500).send(err);
       }
+      req.session.message = "Account Deleted Successfully";
+      req.session.alert = "Success";
       res.redirect("/view_all");
     });
   },
@@ -96,35 +131,49 @@ module.exports = {
       if (err) {
         return res.status(500).send(err);
       }
-      res.render("showaccount.ejs", {
-        title: "Show Account",
-        accounts: result[0],
-        message: "",
-        user: req.session.user_name,
-        type: req.session.user_type,
-        account: req.session.acno
-      });
+      if (result.length != 0) {
+        res.render("showaccount.ejs", {
+          title: "Show Account",
+          accounts: result[0],
+          user: req.session.user_name,
+          type: req.session.user_type,
+          account: req.session.acno,
+          message: "",
+        });
+      } else {
+        req.session.message = "Account Not Found";
+        req.session.alert = "Failed";
+        res.redirect("/view");
+      }
     });
   },
   getViewAll: (req, res) => {
-    let query = "SELECT * FROM account";
+    if (req.session.auth) {
+      if (req.session.user_type != "Personal") {
+        let query = "SELECT * FROM account";
+        db.query(query, (err, result) => {
+          if (err) {
+            res.redirect("/home");
+          }
+          res.render("view_all.ejs", {
+            title: "Welcome to Panna Bank View Account",
+            accounts: result,
+            type: req.session.user_type,
+            user: req.session.user_name,
+            account: accno,
+            message: "",
 
-    db.query(query, (err, result) => {
-      if (err) {
-        res.redirect("/home");
+          });
+        });
+      } else {
+        req.session.message = "You are not Authorised ";
+        req.session.alert = "Failed";
+        res.redirect("/dashboard");
       }
-      let user_name = "Guest";
-      let accno = 000;
-      if (req.session.auth) {
-        user_name = req.session.user_name;
-      }
-      res.render("admin.ejs", {
-        title: "Welcome to Panna Bank View Account",
-        accounts: result,
-        type: req.session.user_type,
-        user: user_name,
-        account: accno
-      });
-    });
+    } else {
+      req.session.message = "You are not Logged IN ";
+      req.session.alert = "Failed";
+      res.redirect("/");
+    }
   },
 };

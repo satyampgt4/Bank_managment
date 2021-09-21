@@ -1,14 +1,24 @@
-const e = require("express");
-
 module.exports = {
     transactionPage: (req, res) => {
-        res.render("transaction_page.ejs", {
-            title: "Welcome to Panna Bank Add a new Account",
-            message: "",
-            user: req.session.user_name,
-            type: req.session.user_type,
-            account: req.session.acno
-        });
+        if (req.session.auth) {
+            if (req.session.user_type == "Admin" || req.session.user_type == "Cashier") {
+                res.render("transaction_page.ejs", {
+                    title: "Welcome to Panna Bank Add a new Account",
+                    message: "",
+                    user: req.session.user_name,
+                    type: req.session.user_type,
+                    account: req.session.acno
+                });
+            } else {
+                req.session.message = "You are not Authorised ";
+                req.session.alert = "Failed";
+                res.redirect("/dashboard");
+            }
+        } else {
+            req.session.message = "You are not Logged IN ";
+            req.session.alert = "Failed";
+            res.redirect("/");
+        }
     },
     makeTransaction: (req, res) => {
         const acno = req.body.acno;
@@ -44,12 +54,14 @@ module.exports = {
                                 return res.status(200).send(err);
 
                             }
+                            req.session.message = `${amount} is Successfully Debit to ${balc}`;
+                            req.session.alert = "Success";
                             res.redirect("/dashboard");
                         });
 
                     } else {
-                        console.log(balc);
-                        console.log("Insufficent Balance")
+                        req.session.message = "Insufficent Balance";
+                        req.session.alert = "Failed";
                         res.redirect("/transaction")
                     }
                 } else {
@@ -65,25 +77,30 @@ module.exports = {
                         if (err) {
                             return res.status(200).send(err);
                         }
+                        req.session.message = `${amount} is Successfully Credit to ${balc}`;
+                        req.session.alert = "Success";
                         res.redirect("/dashboard");
                     });
 
                 }
             });
         });
-
-
-
     },
 
     fundTransferPage: (req, res) => {
-        res.render("fund_transfer_page.ejs", {
-            title: "Welcome to Panna Bank Add a new Account",
-            message: "",
-            user: req.session.user_name,
-            type: req.session.user_type,
-            account: req.session.acno
-        });
+        if (req.session.auth) {
+            res.render("fund_transfer_page.ejs", {
+                title: "Welcome to Panna Bank Add a new Account",
+                message: "",
+                user: req.session.user_name,
+                type: req.session.user_type,
+                account: req.session.acno
+            });
+        } else {
+            req.session.message = "You are not Logged IN ";
+            req.session.alert = "Failed";
+            res.redirect("/");
+        }
     },
     transferFund: (req, res) => {
         const acnof = req.body.acnof;
@@ -116,18 +133,17 @@ module.exports = {
                         if (err) {
                             return res.status(200).send(err);
                         }
+                        req.session.message = `${amount} is Successfully  Transfred to ${acnot}`;
+                        req.session.alert = "Success";
                         res.redirect("/dashboard");
                     });
 
                 } else {
-                    console.log(balf);
-                    console.log("Insufficent Balance")
+                    req.session.message = "Insufficent Balance";
+                    req.session.alert = "Failed";
                     res.redirect("/fundtransfer")
                 }
             });
         });
-
-
-
     },
 };
