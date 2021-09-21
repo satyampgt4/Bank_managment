@@ -2,13 +2,14 @@ module.exports = {
   addAccountPage: (req, res) => {
     if (req.session.auth) {
       if (req.session.user_type == "Admin" || req.session.user_type == "Manager") {
+        let mas = req.session.message;
+        req.session.message = "";
         res.render("add_account.ejs", {
           title: "Welcome to Panna Bank Add a new Account",
-          message: "",
           user: req.session.user_name,
           type: req.session.user_type,
           account: req.session.acno,
-          message: req.session.message,
+          message: mas,
         });
       } else {
         req.session.message = "You are not Authorised ";
@@ -41,9 +42,11 @@ module.exports = {
   editAccountPage: (req, res) => {
     if (req.session.auth) {
       if (req.session.user_type == "Admin" || req.session.user_type == "Manager") {
+        let mas = req.session.message;
+        req.session.message = "";
         res.render("edit_account.ejs", {
           title: "Welcome to Panna Bank Add a new Account",
-          message: "",
+          message: mas,
           user: req.session.user_name,
           type: req.session.user_type,
           account: req.session.acno
@@ -116,9 +119,12 @@ module.exports = {
     });
   },
   showAccountPage: (req, res) => {
+    let mas = req.session.message;
+    req.session.message = "";
     res.render("getaccount.ejs", {
       title: "Welcome to Panna Bank Add a new Account",
-      message: "",
+      message: mas,
+      alert: req.session.alert,
       user: req.session.user_name,
       type: req.session.user_type,
       account: req.session.acno

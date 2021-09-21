@@ -7,8 +7,8 @@ module.exports = {
         res.redirect("/init");
 
       } else {
-        let mas = req.session.message;
         let use = "Guest"
+        let mas = req.session.message;
         req.session.message = "";
         if (req.session.auth) {
           use = req.session.user_name;
@@ -38,7 +38,6 @@ module.exports = {
           req.session.user_name = user_name;
           req.session.user_type = user_type;
           req.session.acno = result[0].acno;
-          console.log(result[0]);
           res.redirect("/dashboard")
         } else {
           req.session.message = "Incorrect Password";
