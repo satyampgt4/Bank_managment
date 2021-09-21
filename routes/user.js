@@ -149,13 +149,15 @@ module.exports = {
       } else {
         req.session.message = "Account Not Found";
         req.session.alert = "Failed";
-        res.redirect("/view");
+        res.redirect("/dashboard");
       }
     });
   },
   getViewAll: (req, res) => {
     if (req.session.auth) {
       if (req.session.user_type != "Personal") {
+        let mas = req.session.message;
+        req.session.message = "";
         let query = "SELECT * FROM account";
         db.query(query, (err, result) => {
           if (err) {
@@ -166,7 +168,8 @@ module.exports = {
             accounts: result,
             type: req.session.user_type,
             user: req.session.user_name,
-            message: "",
+            message: mas,
+            alert: req.session.user_type,
 
           });
         });

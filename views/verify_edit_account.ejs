@@ -50,18 +50,22 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success float-right" formaction="/verifyEdit">Update
-                    Account</button>
-                <button type="submit" class="btn btn-danger float-left" formaction="/delete">Delete
-                    Account</button>
-            </form>
-
-            <% } else { %>
-                <p class="text-center">Account Not Found. Go <a href="/add">here</a> to add Account.</p>
-                <% } %>
+                <div class="form-row mb-md-4 justify-content-between">
+                    <button type="submit" class="btn btn-success float-right" formaction="/verifyEdit">Update
+                        Account</button>
+                    <button type="submit" class="btn btn-danger float-left" formaction="/delete">Delete
+                        Account</button>
+                </div>
     </div>
-    </div>
-    <%- include ('partials/footer.ejs'); -%>
-        </body>
 
-        </html>
+    </form>
+
+    <% } else { %>
+        <p class="text-center">Account Not Found. Go <a href="/add">here</a> to add Account.</p>
+        <% } %>
+            </div>
+            </div>
+            <%- include ('partials/footer.ejs'); -%>
+                </body>
+
+                </html>
